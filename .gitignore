@@ -1,0 +1,3 @@
+*.eml
+.ipynb_*
+data

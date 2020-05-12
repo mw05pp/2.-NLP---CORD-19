@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Analysis of COVID Research Papers</h1>
+
+<hr>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum.</p>
+
+<form class="" action="" method='post'>
+    <div class="">
+        <select id="title_selected" name="title_selected" value={{ doc_details['title_index'] }}>
+            {% for title in titles%}
+                <option value= {{ title[0] }}> {{ title[1] }} </option>
+            {% endfor %}
+    </div>
+    <div class="">
+        <input type="reset" name="Reset" value="Reset">
+        <input type="submit" name="Submit" value="Submit">
+    </div>
+</form>
+
+<hr>
+{% if doc_details['title_index'] != '' %}
+    <h3>Number of tokens: {{ doc_details['doc_length']}}</h3>
+    <h3>Number of authors: {{ doc_details['num_authors'] }}</h3>
+    <h3>Number of bibliography entries: {{ doc_details['num_bib_entries'] }}</h3>
+
+    <div class="">
+        {{ doc_details['entity_bar_graph']|markdown }}
+    </div>
+
+    <div class="">
+        {{ doc_details['doc_entities']|markdown }}
+    </div>
+
+{% else %}
+    <p>Select a document above...</p>
+
+{% endif %}
+
+
+{% endblock %}
